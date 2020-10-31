@@ -1,0 +1,43 @@
+service: offline-serverless-example
+
+plugins:
+  - serverless-python-requirements
+  - serverless-offline
+
+
+provider:
+  name: aws
+  runtime: python3.8
+  stage: ${opt:stage, 'local'}
+  region: sa-east-1
+  memorySize: 128
+
+
+package:
+  individually: true
+  excludeDevDependencies: true
+  exclude:
+    - "*/**"
+    - "package.json"
+    - "package-lock.json"
+    - "Dockerfile"
+
+
+custom:
+  pythonRequirements:
+    slim: true
+
+
+functions:
+  offline-serverless:
+    handler: offline_serverless/handler.handler
+    name: offline-serverless
+    description: Simple example on how to run serverless in offline mode.
+    runtime: python3.8
+    package:
+      include:
+        - offline_serverless/*.py
+    events:
+      - http:
+          path: /wikipedia_search
+          method: post
