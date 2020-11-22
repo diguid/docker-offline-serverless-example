@@ -1,9 +1,0 @@
-version: '3.5'
-services:
-  offline-serverless:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    network_mode: host
-    container_name: offline_serverless
-    command: sls offline start
