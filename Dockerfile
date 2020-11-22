@@ -1,4 +1,4 @@
-FROM nikolaik/python-nodejs:latest
+FROM nikolaik/python-nodejs:python3.8-nodejs15-alpine
 
 RUN npm install -g serverless
 RUN serverless --version
